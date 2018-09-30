@@ -16,13 +16,20 @@ contract CrudApp {
    function CurdApp() public{
        totalCountries = 0;
    }
+
+   event CountryEvent(string countryName , string leader, uint256 population);
    
+   event LeaderUpdated(string countryName , string leader);
+
+   event CountryDelete(string countryName);
+
     
-   function insert( string name , string leader , uint256 population) public returns (uint256 total){
-        country memory newCountry = country(name , leader, population);
+   function insert( string countryName , string leader , uint256 population) public returns (uint256 total){
+        country memory newCountry = country(countryName , leader, population);
         countries.push(newCountry);
         totalCountries++;
         //emit event
+        emit CountryEvent (countryName, leader, population);
         return total;
    }
    
@@ -31,7 +38,7 @@ contract CrudApp {
        for(uint256 i =0; i< totalCountries; i++){
            if(compareStrings(countries[i].name ,countryName)){
               countries[i].leader = newLeader;
-              //emit event
+              emit LeaderUpdated(countryName, newLeader);
               return true;
            }
        }
@@ -47,6 +54,7 @@ contract CrudApp {
               totalCountries--; //total count decrease
               countries.length--; // array length decrease
               //emit event
+              emit CountryDelete(countryName);
               return true;
            }
        }
@@ -69,7 +77,7 @@ contract CrudApp {
    }
    
    
-   function getArrayLength() public view returns (uint256 length){
+   function getTotalCountries() public view returns (uint256 length){
       return countries.length;
    }
 }
