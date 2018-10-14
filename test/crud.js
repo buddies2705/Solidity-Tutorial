@@ -1,21 +1,20 @@
-const Crud = artifacts.require('./Crud.sol')
-const assert = require('assert')
+// const Crud = artifacts.require('./Crud.sol')
+// const assert = require('assert')
 
-let contractInstance;
+// let contractInstance;
 
 
-contract('Crud' , (accounts)  => {
-	beforeEach(async () => {
-		contractInstance = await Crud.deployed()
-	})
+// contract('Crud' , (accounts)  => {
+// 	beforeEach(async () => {
+// 		contractInstance = await Crud.deployed()
+// 	})
 
-	it('should insert new user' , async() => {
-		await contractInstance.insertUser(web3.eth.accounts[0], "Gaurav" , "India")
+// 	it('should insert new user' , async() => {
+// 		await contractInstance.insertUser(web3.eth.accounts[0], "Gaurav" , "India")
 
-		const insertedUser = await contractInstance.getUser(web3.eth.accounts[0]);
-		console.log(insertedUser);
-		assert.equal(insertedUser[0] , "Gaurav");
-		assert.equal(insertedUser[1] , "India");
-	})
+// 		const insertedUser = await contractInstance.getUser(web3.eth.accounts[0]);
+// 		assert.equal(insertedUser[0] , "Gaurav");
+// 		assert.equal(insertedUser[1] , "India");
+// 	})
 
-})
+// })

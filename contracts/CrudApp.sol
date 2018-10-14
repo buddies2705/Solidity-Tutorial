@@ -13,7 +13,7 @@ contract CrudApp {
    uint256 public totalCountries;
   
   
-   function CurdApp() public{
+    constructor() public {
        totalCountries = 0;
    }
 
@@ -61,7 +61,7 @@ contract CrudApp {
        return false;
    }
    
-   
+     
    function getCountry(string countryName) public view returns(string name , string leader , uint256 population){
         for(uint256 i =0; i< totalCountries; i++){
            if(compareStrings(countries[i].name, countryName)){
@@ -69,7 +69,7 @@ contract CrudApp {
               return (countries[i].name , countries[i].leader , countries[i].population);
            }
        }
-       revert();
+       revert('country not found');
    }     
    
    function compareStrings (string a, string b) public view returns (bool){

@@ -11,7 +11,7 @@ contract Crud {
     mapping(address => userStruct) private userStructs; 
     address[] private userIndex; 
 
-    event userEvent(address indexed userAddress, uint index, string userName, string country);
+   event userEvent(address indexed userAddress, uint index, string userName, string country);
 
    function isUser(address userAddress) public constant returns(bool isExist){
    if(userIndex.length == 0) return false; 
@@ -29,7 +29,7 @@ contract Crud {
     userStructs[userAddress].country = country;
     userStructs[userAddress].index = userIndex.push(userAddress)-1; 
     emit userEvent(
-    userAddress,
+    userAddress, 
     userStructs[userAddress].index,
     userName,
     country);
