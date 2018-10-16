@@ -70,36 +70,36 @@ contract('ExampleTokenCrowdsale' , ([_, wallet, investor1, investor2, investor3]
 			this.openingTime,
 			this.closingTime);
 
-		await this.token.transferOwnership(this.crowdsale.address);
+		// await this.token.transferOwnership(this.crowdsale.address);
 		console.log(this.openingTime);
 		// await increaseTimeTo(this.openingTime + 1);
 	})
 
 
-	it('TokenTest' , async() => {	
-		 const tok =  await this.crowdsale.token();
-		 console.log(this.token.address);
-		 console.log(tok);
-		assert.equal(tok , this.token.address);
-	});
+	// it('TokenTest' , async() => {	
+	// 	 const tok =  await this.crowdsale.token();
+	// 	 console.log(this.token.address);
+	// 	 console.log(tok);
+	// 	assert.equal(tok , this.token.address);
+	// });
 
 	
-	it('TransferTest' , async() => {
-		var value = new web3.BigNumber(web3.toWei(20));
-		const tok =  await this.crowdsale.sendTransaction({value: value , from : investor1});
-	})
+	// it('TransferTest' , async() => {
+	// 	var value = new web3.BigNumber(web3.toWei(20));
+	// 	const tok =  await this.crowdsale.sendTransaction({value: value , from : investor1});
+	// })
 
-		it('cappedtest' , async() => {
-		var value = ether(1);
-		try {
-		await this.crowdsale.buyTokens(investor2, {value: value , from : investor2});
-    	assert.fail('Expected revert not received');
- 		 } catch (error) {
- 		   const revertFound = error.message.search('revert') >= 0;
-  			  assert(revertFound, `Expected "revert", got ${error} instead`);
-  			}
+	// 	it('cappedtest' , async() => {
+	// 	var value = ether(1);
+	// 	try {
+	// 	await this.crowdsale.buyTokens(investor2, {value: value , from : investor2});
+ //    	assert.fail('Expected revert not received');
+ // 		 } catch (error) {
+ // 		   const revertFound = error.message.search('revert') >= 0;
+ //  			  assert(revertFound, `Expected "revert", got ${error} instead`);
+ //  			}
 
-	})
+	// })
 
 	it('Timed test' , async() => {	
 		 const isClosed =  await this.crowdsale.hasClosed();
@@ -107,5 +107,11 @@ contract('ExampleTokenCrowdsale' , ([_, wallet, investor1, investor2, investor3]
 		assert.equal(isClosed , false);
 	});
 
+	it('Burn test' , async() => {	
+		 await this.token.burn(1000);
+		 const totalSupply = await this.token.totalSupply();
+		 console.log(totalSupply);
+		assert.equal(totalSupply , 9000);
+	});
 
 }) 

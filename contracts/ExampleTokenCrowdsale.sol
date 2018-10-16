@@ -43,15 +43,5 @@ contract ExampleTokenCrowdsale is MintedCrowdsale, CappedCrowdsale, TimedCrowdsa
 	contributions[_beneficiary] = _newContribution;     
   }
 
- 	
-
-
-
-
-
-
-
-
-
 
 }
